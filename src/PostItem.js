@@ -1,5 +1,6 @@
 import React from "react";
-import PropTypes from 'prop-types';
+import "./PostItem.css";
+import like from "./images/like-default.png";
 
 function PostItem(props) {
   const handleClick = () => {
@@ -7,8 +8,8 @@ function PostItem(props) {
   };
   const { post } = props;
   return (
-    <li>
-      <div>
+    <li className='item'>
+      <div className='title'>
         {post.title}
       </div>
       <div>
@@ -17,24 +18,12 @@ function PostItem(props) {
       <div>
         创建时间：<span>{post.date}</span>
       </div>
-      <div>
-        <button onClick={handleClick}>点赞</button>
-        &nbsp;
-        <span>{post.vote}</span>
+      <div className='like'>
+         <span><img alt='vote' src={like} onClick={handleClick} /></span>
+         <span>{post.vote}</span> 
       </div>
     </li>
   );
-}
-
-PostItem.propTypes = {
-  post: PropTypes.shape({
-    id: PropTypes.number,
-    title: PropTypes.string,
-    author: PropTypes.string,
-    date: PropTypes.string,
-    vote: PropTypes.number
-  }).isRequired,
-  onVote: PropTypes.func.isRequired
 }
 
 export default PostItem;
