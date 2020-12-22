@@ -8,7 +8,7 @@ class PostList extends Component {
     this.state = {
       posts: []
     };
-    this.timer = null;//定时器
+    this.timer = null;
     this.handleVote = this.handleVote.bind(this);
   }
 
@@ -27,17 +27,16 @@ class PostList extends Component {
 
   componentWillUnmount() {
     if(this.timer) {
-      clearTimeout(this.timer);//清除定时器
+      clearTimeout(this.timer);
     }
   }
 
+  // 处理点赞逻辑
   handleVote(id) {
-    //根据帖子id进行过滤，找到待修改vote属性的帖子，返回新的posts对象
     const posts = this.state.posts.map(item => {
       const newItem = item.id === id ? {...item, vote: ++item.vote} : item;
       return newItem;
     })
-    //使用新的posts对象设置state
     this.setState({
       posts
     })
@@ -50,6 +49,7 @@ class PostList extends Component {
         <ul>
           {this.state.posts.map(item =>
             <PostItem
+              key = {item.id}
               post = {item}
               onVote = {this.handleVote}
             />
